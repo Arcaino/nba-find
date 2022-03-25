@@ -27,3 +27,5 @@ class Games{
         this.#visitor_team_score = visitor_team_score;
     }
 }
+
+export default Games;

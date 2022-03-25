@@ -1,4 +1,4 @@
-import GamesResults from '../components/games-results/GamesResults.js'
+import FeaturedResults from '../core/FeauredResults.js';
 
 class GamesPage extends HTMLElement{
 
@@ -17,7 +17,7 @@ class GamesPage extends HTMLElement{
 
     html(){
         
-        const gameTab = document.createElement('games-results');
+        const gameTab = document.createElement('featured-results');
 
         return gameTab;
     }
