@@ -1,4 +1,4 @@
-import GamesList from "../../../models/GamesList.js";
+import GamesController from "../../../controllers/GamesController.js";
 
 class GamesResults extends HTMLElement{
 
@@ -6,15 +6,14 @@ class GamesResults extends HTMLElement{
 
     constructor(){
 
-        super();
+        super();        
         this.#shadow = this.attachShadow({ mode: 'open' });
-        this.render();
     }
 
-    render(){
+    render(model){
 
         this.#shadow.appendChild(this.styles());
-        this.#shadow.appendChild(this.html());     
+        this.#shadow.appendChild(this.html(model));     
         this.colorScore();   
     }
 
@@ -54,7 +53,9 @@ class GamesResults extends HTMLElement{
         return style;
     }
 
-    html(){
+    html(model){
+
+        console.log(model.gamesList);
 
         const gameTab = document.createElement('div');
         gameTab.classList.add('games-results');

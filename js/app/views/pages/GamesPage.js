@@ -1,11 +1,16 @@
+import GamesController from '../../controllers/GamesController.js';
 import FeaturedResults from '../core/FeauredResults.js';
 
 class GamesPage extends HTMLElement{
+
+    #gamesController;
 
     constructor(){
         super();
 
         this.render();
+        this.#gamesController = new GamesController();
+        this.#gamesController.getGames();
     }
 
     render(){

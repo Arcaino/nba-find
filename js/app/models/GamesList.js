@@ -18,4 +18,4 @@ class GamesList{
     }
 }
 
-export default GamesList;
+export default GamesList

@@ -1,5 +1,3 @@
-import GamesResults from "../components/games-results/GamesResults.js";
-
 class FeaturedResults extends HTMLElement{
 
     constructor(){

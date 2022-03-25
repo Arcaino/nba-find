@@ -26,6 +26,36 @@ class Games{
         this.#visitor_team = visitor_team;
         this.#visitor_team_score = visitor_team_score;
     }
+
+    get date(){
+
+        return this.#date;
+    }
+
+    get home_team(){
+
+        return this.#home_team;
+    }
+
+    get home_team_score(){
+
+        return this.#home_team_score;
+    }
+
+    get season(){
+
+        return this.#season;
+    }
+
+    get visitor_team(){
+
+        return this.#visitor_team;
+    }
+
+    get visitor_team_score(){
+
+        return this.#visitor_team_score;
+    }
 }
 
 export default Games;
