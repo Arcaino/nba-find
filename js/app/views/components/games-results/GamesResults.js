@@ -3,17 +3,20 @@ import GamesController from "../../../controllers/GamesController.js";
 class GamesResults extends HTMLElement{
 
     #shadow;
+    #gamesController;
 
     constructor(){
-
         super();        
-        this.#shadow = this.attachShadow({ mode: 'open' });
+
+        this.#gamesController = new GamesController();
+        this.#gamesController.getGames().then(() => this.render());
     }
 
-    render(model){
-
+    render(){
+                
+        this.#shadow = this.attachShadow({ mode: 'open' });
         this.#shadow.appendChild(this.styles());
-        this.#shadow.appendChild(this.html(model));     
+        this.#shadow.appendChild(this.html(this.#gamesController.gamesList));     
         this.colorScore();   
     }
 
@@ -55,23 +58,21 @@ class GamesResults extends HTMLElement{
 
     html(model){
 
-        console.log(model.gamesList);
-
         const gameTab = document.createElement('div');
         gameTab.classList.add('games-results');
         gameTab.innerHTML = `
 
             <table class="results__table">
                 <tr class="results__table__info">
-                    <td class="results__table__info__homeTeam">Boston Celtics</td>
+                    <td class="results__table__info__homeTeam">${model.gamesList[0].home_team.full_name}</td>
                     <td class="results__table__info__score">
-                        <span class="results__table__info__score__homeTeamScore">126</span>
+                        <span class="results__table__info__score__homeTeamScore">${model.gamesList[0].home_team_score}</span>
                         <span class="results__table__info__score__separator">-</span>
-                        <span class="results__table__info__score__visitorTeamScore">94</span>
+                        <span class="results__table__info__score__visitorTeamScore">${model.gamesList[0].visitor_team_score}</span>
                     </td>
-                    <td class="results__table__info__visitorTeam">Boston Celtics</td>
-                    <td class="results__table__info__season">Season</td>
-                    <td class="results__table__info__date">Date</td>
+                    <td class="results__table__info__visitorTeam">${model.gamesList[0].visitor_team.full_name}</td>
+                    <td class="results__table__info__season">${model.gamesList[0].season}</td>
+                    <td class="results__table__info__date">${model.gamesList[0].date}</td>
                 </tr>
             </table>
         `

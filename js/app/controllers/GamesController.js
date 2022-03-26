@@ -31,20 +31,20 @@ class GamesController{
         )
     }
 
-    getGames(){
+    async getGames(){
         
-        this.#api.getGamesRequest()
-            .then(games => {
-                
-                games.data.forEach(game => {
+        try{
 
-                    this.gamesList.add(this.add(game));
-                })
-                
-                this.#gamesResults = new GamesResults();  
-                this.#gamesResults.render(this.gamesList);
-            })
-            .catch(error => console.log(error));
+            const games = await this.#api.getGamesRequest();  
+            games.data.forEach(game => {
+    
+                this.gamesList.add(this.add(game));                    
+            })            
+        }
+        catch(error){
+
+            console.log(error);
+        }        
     }
 }
 
