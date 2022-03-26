@@ -1,22 +1,21 @@
-import GamesController from "../../../controllers/GamesController.js";
-
 class GamesResults extends HTMLElement{
 
     #shadow;
-    #gamesController;
+    #game;
 
-    constructor(){
+    constructor(game){
         super();        
 
-        this.#gamesController = new GamesController();
-        this.#gamesController.getGames().then(() => this.render());
+        this.#game = game;
+        this.render();
     }
 
     render(){
                 
         this.#shadow = this.attachShadow({ mode: 'open' });
         this.#shadow.appendChild(this.styles());
-        this.#shadow.appendChild(this.html(this.#gamesController.gamesList));     
+
+        this.#shadow.appendChild(this.html(this.#game));     
         this.colorScore();   
     }
 
@@ -32,6 +31,8 @@ class GamesResults extends HTMLElement{
                 padding: .7rem;
                 border-radius: .3rem;
                 font-family: 'Roboto', sans-serif;
+                font-size: 12px;
+                margin: .5rem 0;
             }
 
             .results__table__info__homeTeam{
@@ -51,6 +52,16 @@ class GamesResults extends HTMLElement{
                 padding: 0 1rem;
                 width: 4rem;
             }
+
+            .results__table__info__date{
+                text-align: end;
+                width: 30%;
+            }
+
+            .results__table__info__season{
+                text-align: end;
+                width: 10%;
+            }
         `
 
         return style;
@@ -64,15 +75,15 @@ class GamesResults extends HTMLElement{
 
             <table class="results__table">
                 <tr class="results__table__info">
-                    <td class="results__table__info__homeTeam">${model.gamesList[0].home_team.full_name}</td>
+                    <td class="results__table__info__homeTeam">${model.home_team.full_name}</td>
                     <td class="results__table__info__score">
-                        <span class="results__table__info__score__homeTeamScore">${model.gamesList[0].home_team_score}</span>
+                        <span class="results__table__info__score__homeTeamScore">${model.home_team_score}</span>
                         <span class="results__table__info__score__separator">-</span>
-                        <span class="results__table__info__score__visitorTeamScore">${model.gamesList[0].visitor_team_score}</span>
+                        <span class="results__table__info__score__visitorTeamScore">${model.visitor_team_score}</span>
                     </td>
-                    <td class="results__table__info__visitorTeam">${model.gamesList[0].visitor_team.full_name}</td>
-                    <td class="results__table__info__season">${model.gamesList[0].season}</td>
-                    <td class="results__table__info__date">${model.gamesList[0].date}</td>
+                    <td class="results__table__info__visitorTeam">${model.visitor_team.full_name}</td>
+                    <td class="results__table__info__season">${model.season}</td>
+                    <td class="results__table__info__date">${model.date}</td>
                 </tr>
             </table>
         `

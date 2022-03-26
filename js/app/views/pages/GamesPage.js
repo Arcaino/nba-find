@@ -1,5 +1,5 @@
 import GamesController from '../../controllers/GamesController.js';
-import FeaturedResults from '../core/FeauredResults.js';
+import FeaturedResults from '../components/shared/featured-results/FeauredResults.js';
 
 class GamesPage extends HTMLElement{
 

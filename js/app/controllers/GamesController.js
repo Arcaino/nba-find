@@ -1,12 +1,10 @@
 import Games from "../models/Games.js";
 import GamesList from "../models/GamesList.js";
 import FreenbaAPI from "../services/FreenbaAPI.js";
-import GamesResults from "../views/components/games-results/GamesResults.js";
 
 class GamesController{
 
     #api;
-    #gamesResults;
 
     constructor(){
 
@@ -39,7 +37,7 @@ class GamesController{
             games.data.forEach(game => {
     
                 this.gamesList.add(this.add(game));                    
-            })            
+            })                        
         }
         catch(error){
 
