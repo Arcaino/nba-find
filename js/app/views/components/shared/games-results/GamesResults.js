@@ -1,3 +1,5 @@
+import DateConverter from '../../../../helpers/DateConverter.js'
+
 class GamesResults extends HTMLElement{
 
     #shadow;
@@ -83,7 +85,7 @@ class GamesResults extends HTMLElement{
                     </td>
                     <td class="results__table__info__visitorTeam">${model.visitor_team.full_name}</td>
                     <td class="results__table__info__season">${model.season}</td>
-                    <td class="results__table__info__date">${model.date}</td>
+                    <td class="results__table__info__date">${DateConverter.dateStringToDateShortString(model.date)}</td>
                 </tr>
             </table>
         `
