@@ -9,7 +9,8 @@ class GamesController{
     constructor(){
 
         this.#api = new FreenbaAPI();
-        this.gamesList = new GamesList();               
+        this.gamesList = new GamesList();   
+        this.apiResponse;            
     }
 
     add(game){
@@ -29,15 +30,15 @@ class GamesController{
         )
     }
 
-    async getGames(){
+    async getGames(page){
         
         try{
 
-            const games = await this.#api.getGamesRequest();  
-            games.data.forEach(game => {
+            this.apiResponse = await this.#api.getGamesRequest(page);  
+            this.apiResponse.data.forEach(game => {
     
                 this.gamesList.add(this.add(game));                    
-            })                        
+            })       
         }
         catch(error){
 

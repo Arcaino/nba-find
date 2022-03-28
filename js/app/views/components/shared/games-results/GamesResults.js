@@ -35,10 +35,16 @@ class GamesResults extends HTMLElement{
                 font-family: 'Roboto', sans-serif;
                 font-size: 12px;
                 margin: .5rem 0;
+                cursor: pointer;
             }
 
             .results__table__info__homeTeam{
                 text-align: right;
+                width: 25%;
+            }
+
+            .results__table__info__visitorTeam{
+                width: 25%;
             }
 
             .results__table__info__score__homeTeamScore, .results__table__info__score__visitorTeamScore{
@@ -52,12 +58,13 @@ class GamesResults extends HTMLElement{
 
             .results__table__info__score{
                 padding: 0 1rem;
-                width: 4rem;
+                width: 15%;
+                text-align: center;
             }
 
             .results__table__info__date{
                 text-align: end;
-                width: 30%;
+                width: 20%;
             }
 
             .results__table__info__season{
