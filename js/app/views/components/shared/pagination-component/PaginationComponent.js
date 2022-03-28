@@ -81,29 +81,52 @@ class PaginationComponent extends HTMLElement{
     setNumbersOnPaginationNavigation(paginationComponent){
 
         let pageButtons = paginationComponent.querySelectorAll('.pagination-component__pages__button')
-        let firstButton = pageButtons[0];
-        let previousOfCurrentButton = pageButtons[1];
-        let currentButton = pageButtons[2];
-        let nextOfCurrentButton = pageButtons[3];
-
-        if(previousOfCurrentButton.innerHTML == 0){
-
-            firstButton.style.background = "#d5d5d5";
-            firstButton.innerHTML = 1;
-            previousOfCurrentButton.style.display = "none";
-            currentButton.setAttribute("data-value", 2);
-            currentButton.innerHTML = 2;
-            nextOfCurrentButton.setAttribute("data-value", 3);
-            nextOfCurrentButton.innerHTML = 3;
-        }else if(previousOfCurrentButton.innerHTML == 1){
-            
-            firstButton.style.display = "none";
-            currentButton.style.background = "#d5d5d5";
-        }else{
-
-            currentButton.style.background = "#d5d5d5";
+        const paginationButtons = {
+            firstButton: pageButtons[0],
+            previousOfCurrentButton: pageButtons[1],
+            currentButton: pageButtons[2],
+            nextOfCurrentButton: pageButtons[3],
+            lastButton: pageButtons[4]
         }
 
+        if(this.#isOnFirstPage(paginationButtons)){
+
+            paginationButtons.firstButton.style.background = "#d5d5d5";
+            paginationButtons.firstButton.innerHTML = 1;
+            paginationButtons.previousOfCurrentButton.style.display = "none";
+            paginationButtons.currentButton.setAttribute("data-value", 2);
+            paginationButtons.currentButton.innerHTML = 2;
+            paginationButtons.nextOfCurrentButton.setAttribute("data-value", 3);
+            paginationButtons.nextOfCurrentButton.innerHTML = 3;
+        }else if(this.#isOnSecondPage(paginationButtons)){
+            
+            paginationButtons.firstButton.style.display = "none";
+            paginationButtons.currentButton.style.background = "#d5d5d5";
+        }else if(this.#isOnLastPage(paginationButtons)){
+
+            paginationButtons.nextOfCurrentButton.style.display = "none";
+            paginationButtons.currentButton.style.background = "#d5d5d5";
+            paginationButtons.lastButton.style.display = "none";
+        }else{
+
+            paginationButtons.currentButton.style.background = "#d5d5d5";
+        }
+
+    }
+
+    #isOnFirstPage(paginationButtons){
+
+        return paginationButtons.previousOfCurrentButton.innerHTML == 0;
+    }
+
+    #isOnSecondPage(paginationButtons){
+
+        return paginationButtons.previousOfCurrentButton.innerHTML == 1;
+    }
+
+    #isOnLastPage(paginationButtons){
+
+        return paginationButtons.nextOfCurrentButton.innerHTML == 'null';
     }
 }
 
