@@ -80,14 +80,14 @@ class FeaturedResults extends HTMLElement{
 
     changePage(){
 
-        let pageButtons = this.#featuredResults.querySelector('pagination-component').shadowRoot.querySelectorAll('.pagination-component__pages__button');
+        let pageButtons = this.#featuredResults.querySelector('pagination-component').shadowRoot.querySelectorAll('.pg-btn');
 
         pageButtons.forEach(item => {
             item.addEventListener('click', () => {
 
                 this.#gamesController = new GamesController();
               
-                this.#gamesController.getGames(item.innerHTML).then(() => {
+                this.#gamesController.getGames(item.getAttribute('data-value')).then(() => {
                     
                     this.#shadow.querySelector('.featured-results').remove();
                     this.#shadow.appendChild(this.style());
