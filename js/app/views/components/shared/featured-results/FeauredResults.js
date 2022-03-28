@@ -5,21 +5,24 @@ import PaginationComponent from "../pagination-component/PaginationComponent.js"
 class FeaturedResults extends HTMLElement{
 
     #gamesController;
-    #gamesResults;
+    #gamesResults;    
     #paginationComponent;
+    #featuredResults;
+    #gameList;
+    #shadow;
 
-    constructor(){
+    constructor(page = 1){
 
         super();
         this.#gamesController = new GamesController();
-        this.#gamesController.getGames().then(() => this.render());     
+        this.#gamesController.getGames(page).then(() => this.render());     
     }
 
     render(){
 
-        const shadow = this.attachShadow({ mode: 'open' })
-        shadow.appendChild(this.style());
-        shadow.appendChild(this.html(this.#gamesController.gamesList));        
+        this.#shadow = this.attachShadow({ mode: 'open' })
+        this.#shadow.appendChild(this.style());
+        this.#shadow.appendChild(this.html(this.#gamesController.gamesList)); 
     }
 
     style(){
@@ -44,27 +47,54 @@ class FeaturedResults extends HTMLElement{
 
     html(model){
 
-        const featuredResults = document.createElement('div');
-        featuredResults.classList.add('featured-results');
+        this.#featuredResults = document.createElement('div');
+        this.#featuredResults.classList.add('featured-results');
 
-        featuredResults.innerHTML = `
+        this.#featuredResults.innerHTML = `
 
             <h1 class="featured-results__title">Featured results</h1>
         `;
 
+        this.createGameResultList(model);
+
+        this.#paginationComponent = new PaginationComponent(this.#gamesController.apiResponse.meta);
+        this.#featuredResults.appendChild(this.#paginationComponent);  
+
+        this.changePage();
+
+        return this.#featuredResults;
+    }
+
+    createGameResultList(model){
+
         const createGameResultList = (_, index) => {
 
-            featuredResults.appendChild(
+            this.#featuredResults.appendChild(
                 
                 this.#gamesResults = new GamesResults(model.gamesList[index]) 
             );
         };
 
         Array.from({length: model.gamesList.length}, createGameResultList);
+    }
 
-        featuredResults.appendChild(this.#paginationComponent = new PaginationComponent(this.#gamesController.apiResponse.meta));
+    changePage(){
 
-        return featuredResults;
+        let pageButtons = this.#featuredResults.querySelector('pagination-component').shadowRoot.querySelectorAll('.pagination-component__pages__button');
+
+        pageButtons.forEach(item => {
+            item.addEventListener('click', () => {
+
+                this.#gamesController = new GamesController();
+              
+                this.#gamesController.getGames(item.innerHTML).then(() => {
+                    
+                    this.#shadow.querySelector('.featured-results').remove();
+                    this.#shadow.appendChild(this.style());
+                    this.#shadow.appendChild(this.html(this.#gamesController.gamesList)); 
+                });                                 
+            });
+        });
     }
 }
 

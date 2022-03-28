@@ -37,7 +37,7 @@ class GamesController{
             this.apiResponse = await this.#api.getGamesRequest(page);  
             this.apiResponse.data.forEach(game => {
     
-                this.gamesList.add(this.add(game));                    
+                this.gamesList.add(this.add(game));                 
             })       
         }
         catch(error){

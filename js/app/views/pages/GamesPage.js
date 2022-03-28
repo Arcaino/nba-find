@@ -1,12 +1,20 @@
 import GamesController from '../../controllers/GamesController.js';
 import FeaturedResults from '../components/shared/featured-results/FeauredResults.js';
+import PaginationComponent from "../components/shared/pagination-component/PaginationComponent.js";
 
 class GamesPage extends HTMLElement{
+
+    #paginationComponent;
+    #gamesController;
+    #featuredResult;
+    #gameTab;
 
     constructor(){
         super();
     
+        this.#gamesController = new GamesController();
         this.render();
+        
     }
 
     render(){
@@ -18,9 +26,11 @@ class GamesPage extends HTMLElement{
 
     html(){
         
-        const gameTab = document.createElement('featured-results');
+        this.#gameTab = document.createElement('div');
+        this.#gameTab.classList.add('games-page');   
+        this.#gameTab.appendChild(this.#featuredResult = new FeaturedResults());
 
-        return gameTab;
+        return this.#gameTab;
     }
 
 
