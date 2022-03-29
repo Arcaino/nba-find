@@ -1,3 +1,5 @@
+import themeColors from "../../../utils/themeColors.js";
+
 class PaginationComponent extends HTMLElement{
 
     #apiPages;
@@ -24,11 +26,12 @@ class PaginationComponent extends HTMLElement{
 
                 display: flex;
                 justify-content: end;
+                margin: .5rem 0;
             }
 
             .pagination-component__pages__button:hover, .pagination-component__left:hover, .pagination-component__right:hover{
 
-                background-color: #d5d5d5;
+                background-color: ${themeColors.hoverColor};
                 cursor: pointer;
             }
             
@@ -36,7 +39,7 @@ class PaginationComponent extends HTMLElement{
 
                 border: 0;
                 padding: .8rem;
-                background-color: #f6f6f6;
+                background-color: ${themeColors.secundaryColor};
                 box-shadow: 0 1px 2px 0 rgba(50,50,50,.4);
                 margin: 0 .1rem;
             }
@@ -48,9 +51,9 @@ class PaginationComponent extends HTMLElement{
                 background-color: transparent;
             }
 
-            .pagination-selected{
+            .pagination-component__pages > * {
 
-                background-color: #d5d5d5;
+                border-radius: .2rem;
             }
         `;
         return style;
@@ -80,7 +83,8 @@ class PaginationComponent extends HTMLElement{
 
     setNumbersOnPaginationNavigation(paginationComponent){
 
-        let pageButtons = paginationComponent.querySelectorAll('.pagination-component__pages__button')
+        let pageButtons = paginationComponent.querySelectorAll('.pagination-component__pages__button');
+        
         const paginationButtons = {
             firstButton: pageButtons[0],
             previousOfCurrentButton: pageButtons[1],
@@ -91,7 +95,8 @@ class PaginationComponent extends HTMLElement{
 
         if(this.#isOnFirstPage(paginationButtons)){
 
-            paginationButtons.firstButton.style.background = "#d5d5d5";
+            paginationButtons.firstButton.style.background = themeColors.primaryColor;
+            paginationButtons.firstButton.style.color = themeColors.secundaryColor;
             paginationButtons.firstButton.innerHTML = 1;
             paginationButtons.previousOfCurrentButton.style.display = "none";
             paginationButtons.currentButton.setAttribute("data-value", 2);
@@ -101,15 +106,18 @@ class PaginationComponent extends HTMLElement{
         }else if(this.#isOnSecondPage(paginationButtons)){
             
             paginationButtons.firstButton.style.display = "none";
-            paginationButtons.currentButton.style.background = "#d5d5d5";
+            paginationButtons.currentButton.style.background = themeColors.primaryColor;
+            paginationButtons.currentButton.style.color = themeColors.secundaryColor;
         }else if(this.#isOnLastPage(paginationButtons)){
 
             paginationButtons.nextOfCurrentButton.style.display = "none";
-            paginationButtons.currentButton.style.background = "#d5d5d5";
+            paginationButtons.currentButton.style.background = themeColors.primaryColor;
+            paginationButtons.currentButton.style.color = themeColors.secundaryColor;
             paginationButtons.lastButton.style.display = "none";
         }else{
 
-            paginationButtons.currentButton.style.background = "#d5d5d5";
+            paginationButtons.currentButton.style.background = themeColors.primaryColor;
+            paginationButtons.currentButton.style.color = themeColors.secundaryColor;
         }
 
     }

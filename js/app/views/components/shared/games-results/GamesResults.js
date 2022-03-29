@@ -1,4 +1,5 @@
-import DateConverter from '../../../../helpers/DateConverter.js'
+import DateConverter from '../../../../helpers/DateConverter.js';
+import themeColors from '../../../utils/themeColors.js';
 
 class GamesResults extends HTMLElement{
 
@@ -28,7 +29,7 @@ class GamesResults extends HTMLElement{
 
             .games-results{
 
-                background-color: #f6f6f6;
+                background-color: ${themeColors.secundaryColor};
                 box-shadow: 0 1px 2px 0 rgba(50,50,50,.4);
                 padding: .7rem;
                 border-radius: .3rem;
@@ -36,6 +37,11 @@ class GamesResults extends HTMLElement{
                 font-size: 12px;
                 margin: .5rem 0;
                 cursor: pointer;
+            }
+
+            .games-results:hover{
+
+                background-color: ${themeColors.hoverColor};
             }
 
             .results__table__info__homeTeam{

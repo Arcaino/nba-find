@@ -1,13 +1,12 @@
 import GamesController from '../../controllers/GamesController.js';
 import FeaturedResults from '../components/shared/featured-results/FeauredResults.js';
-import PaginationComponent from "../components/shared/pagination-component/PaginationComponent.js";
+import SeasonFilter from '../components/shared/season-filter/SeasonFilter.js';
 
 class GamesPage extends HTMLElement{
 
-    #paginationComponent;
     #gamesController;
     #featuredResult;
-    #gameTab;
+    #seasonFilter;
 
     constructor(){
         super();
@@ -21,16 +20,34 @@ class GamesPage extends HTMLElement{
 
         const shadow = this.attachShadow({ mode: 'open' });                    
 
+        shadow.appendChild(this.style());
         shadow.appendChild(this.html());
+    }
+
+    style(){
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .games-page{
+
+                width: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        `;
+
+        return style;
     }
 
     html(){
         
-        this.#gameTab = document.createElement('div');
-        this.#gameTab.classList.add('games-page');   
-        this.#gameTab.appendChild(this.#featuredResult = new FeaturedResults());
+        const gameTab = document.createElement('div');
+        gameTab.classList.add('games-page');   
+        gameTab.appendChild(this.#featuredResult = new FeaturedResults());
+        gameTab.appendChild(this.#seasonFilter = new SeasonFilter());
 
-        return this.#gameTab;
+        return gameTab;
     }
 
 

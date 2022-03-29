@@ -32,7 +32,8 @@ class FeaturedResults extends HTMLElement{
             .featured-results{
 
                 width: 50%;
-                margin: 0 auto;
+                position: absolute;
+                right: 19.5%;
             }
             
             .featured-results__title{
@@ -40,6 +41,7 @@ class FeaturedResults extends HTMLElement{
                 font-family: 'Roboto', sans-serif;
                 font-size: 1.5rem;
                 margin: .5rem 0;
+                color: #2b6ea4;
             }
         `;
         return style;
